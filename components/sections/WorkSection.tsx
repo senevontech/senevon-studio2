@@ -1,7 +1,11 @@
-import { projects } from "@/lib/content";
 import { SectionShell } from "@/components/ui/SectionShell";
+import type { PortfolioProject } from "@/types/project";
 
-export function WorkSection() {
+type WorkSectionProps = {
+  items: PortfolioProject[];
+};
+
+export function WorkSection({ items }: WorkSectionProps) {
   return (
     <SectionShell
       id="work"
@@ -10,7 +14,7 @@ export function WorkSection() {
       subtitle="Each project block will later connect to dedicated detail pages and media-rich narratives."
     >
       <div className="grid gap-5 md:grid-cols-3">
-        {projects.map((project) => (
+        {items.map((project) => (
           <article
             key={project.name}
             className="rounded-2xl border border-surface-edge bg-gradient-to-b from-surface-panel to-surface-base p-6"

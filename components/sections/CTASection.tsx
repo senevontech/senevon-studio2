@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function CTASection() {
   return (
     <section className="px-6 pb-20 pt-10 md:pb-24">
@@ -9,8 +11,12 @@ export function CTASection() {
           Ready to craft a portfolio experience that feels unlike every other studio site?
         </h2>
         <div className="mt-8 flex flex-wrap gap-4">
-          <button className="btn-primary">Book a Discovery Call</button>
-          <button className="btn-secondary">Get Capability Deck</button>
+          <Link href="/contact" className="btn-primary">
+            Book a Discovery Call
+          </Link>
+          <Link href="/about" className="btn-secondary">
+            Get Capability Deck
+          </Link>
         </div>
       </div>
     </section>

@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: senevon-studio2
+    env: node
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0

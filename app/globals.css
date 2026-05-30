@@ -100,7 +100,7 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply rounded-full border border-accent-cyan bg-accent-cyan/10 px-5 py-3 text-xs uppercase tracking-[0.2em] text-accent-cyan transition hover:bg-accent-cyan/20;
+    @apply rounded-full border border-accent-cyan bg-[rgba(34,211,238,0.1)] px-5 py-3 text-xs uppercase tracking-[0.2em] text-accent-cyan transition hover:bg-[rgba(34,211,238,0.2)];
   }
 
   .btn-secondary {

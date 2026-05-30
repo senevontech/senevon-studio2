@@ -1,3 +1,16 @@
+import dynamic from "next/dynamic";
+import Link from "next/link";
+
+const HeroScene = dynamic(
+  () => import("@/components/3d/HeroScene").then((module) => module.HeroScene),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-64 w-full animate-pulse rounded-2xl border border-surface-edge bg-surface-base/80 md:h-72" />
+    )
+  }
+);
+
 export function HeroSection() {
   return (
     <section className="relative isolate overflow-hidden px-6 pb-24 pt-28 md:pb-32 md:pt-36">
@@ -22,18 +35,25 @@ export function HeroSection() {
             performance-first engineering.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button className="btn-primary">Start a Project</button>
-            <button className="btn-secondary">View Work</button>
+            <Link href="/contact" className="btn-primary">
+              Start a Project
+            </Link>
+            <Link href="/work" className="btn-secondary">
+              View Work
+            </Link>
           </div>
         </div>
 
         <div className="w-full max-w-sm rounded-3xl border border-surface-edge bg-surface-panel/70 p-6 backdrop-blur">
           <p className="text-xs uppercase tracking-[0.22em] text-accent-lime">
-            Live Scene Placeholder
+            Live 3D Preview
           </p>
+          <div className="mt-4">
+            <HeroScene />
+          </div>
           <p className="mt-4 text-sm leading-relaxed text-text-mute">
-            This panel is reserved for the upcoming R3F hero scene. In Phase 2 we will
-            connect camera movement and scroll-driven animation.
+            Phase 2 started: interactive canvas is now live. Next pass will bind scene
+            movement to storytelling scroll timelines.
           </p>
         </div>
       </div>

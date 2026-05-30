@@ -5,9 +5,11 @@ export type Capability = {
 };
 
 export type Project = {
+  slug: string;
   name: string;
   category: string;
   impact: string;
+  summary: string;
 };
 
 export type ProcessStep = {
@@ -40,19 +42,28 @@ export const capabilities: Capability[] = [
 
 export const projects: Project[] = [
   {
+    slug: "orion-launch-console",
     name: "Orion Launch Console",
     category: "SaaS Platform",
-    impact: "42% faster onboarding funnel"
+    impact: "42% faster onboarding funnel",
+    summary:
+      "Rebuilt onboarding architecture with guided motion states and task-centric navigation."
   },
   {
+    slug: "nexa-mobility-hub",
     name: "Nexa Mobility Hub",
     category: "Realtime Operations",
-    impact: "3.4x jump in dashboard engagement"
+    impact: "3.4x jump in dashboard engagement",
+    summary:
+      "Designed a dense but readable operations interface for distributed transport teams."
   },
   {
+    slug: "velar-commerce-space",
     name: "Velar Commerce Space",
     category: "Digital Retail",
-    impact: "29% growth in repeat purchase rate"
+    impact: "29% growth in repeat purchase rate",
+    summary:
+      "Introduced immersive product storytelling and high-trust checkout decision flows."
   }
 ];
 
