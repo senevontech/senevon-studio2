@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface-base: #05090d;
+  --surface-panel: #0b1218;
+  --surface-edge: #1a2a36;
+  --text-base: #ebf3fa;
+  --text-mute: #99a8b5;
+  --accent-cyan: #22d3ee;
+  --accent-lime: #bef264;
+  --accent-orange: #fb923c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(circle at 20% 15%, rgba(34, 211, 238, 0.13), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(190, 242, 100, 0.1), transparent 32%),
+    var(--surface-base);
+  color: var(--text-base);
+  font-family: var(--font-body), sans-serif;
+}
+
+.font-heading {
+  font-family: var(--font-heading), sans-serif;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(26, 42, 54, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 42, 54, 0.4) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at 50% 10%, black 10%, transparent 72%);
+}
+
+.hero-orb {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  filter: blur(35px);
+  opacity: 0.6;
+}
+
+.hero-orb-cyan {
+  top: 6%;
+  right: 8%;
+  background: rgba(34, 211, 238, 0.32);
+  animation: drift-cyan 10s ease-in-out infinite;
+}
+
+.hero-orb-orange {
+  bottom: 0;
+  left: 10%;
+  background: rgba(251, 146, 60, 0.2);
+  animation: drift-orange 12s ease-in-out infinite;
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(235, 243, 250, 0.6);
+}
+
+@keyframes drift-cyan {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-26px) translateX(-16px);
+  }
+}
+
+@keyframes drift-orange {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(22px) translateX(18px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb-cyan,
+  .hero-orb-orange {
+    animation: none;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-full border border-accent-cyan bg-accent-cyan/10 px-5 py-3 text-xs uppercase tracking-[0.2em] text-accent-cyan transition hover:bg-accent-cyan/20;
+  }
+
+  .btn-secondary {
+    @apply rounded-full border border-surface-edge bg-surface-panel px-5 py-3 text-xs uppercase tracking-[0.2em] text-text-base transition hover:border-accent-orange hover:text-accent-orange;
+  }
+}
