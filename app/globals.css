@@ -71,6 +71,26 @@ body {
   -webkit-text-stroke: 1px rgba(235, 243, 250, 0.6);
 }
 
+.room-noise {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(34, 211, 238, 0.14), transparent 34%),
+    radial-gradient(circle at 84% 82%, rgba(251, 146, 60, 0.14), transparent 30%),
+    linear-gradient(145deg, rgba(5, 9, 13, 0.82), rgba(7, 14, 19, 0.96));
+}
+
+.room-rings {
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.2) 0, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.18) 0, transparent 32%),
+    radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.15) 0, transparent 46%);
+  background-size: 100% 100%;
+  filter: blur(0.4px);
+}
+
+.room-core-pulse {
+  animation: room-core-pulse 3.8s ease-in-out infinite;
+}
+
 @keyframes drift-cyan {
   0%,
   100% {
@@ -91,9 +111,22 @@ body {
   }
 }
 
+@keyframes room-core-pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.84;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.14);
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-orb-cyan,
-  .hero-orb-orange {
+  .hero-orb-orange,
+  .room-core-pulse {
     animation: none;
   }
 }

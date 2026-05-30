@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { IdentitySection } from "@/components/sections/IdentitySection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { WorkSection } from "@/components/sections/WorkSection";
+import { RoomStorySection } from "@/components/story/RoomStorySection";
 import { getFeaturedProjectsStatic } from "@/lib/data/projects";
 
 export default function HomePage() {
@@ -15,6 +16,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-surface-base text-text-base">
       <SiteHeader />
       <HeroSection />
+      <RoomStorySection />
       <IdentitySection />
       <CapabilitiesSection />
       <WorkSection initialItems={featuredProjects} />
