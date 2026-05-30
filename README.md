@@ -25,9 +25,11 @@ cp .env.example .env.local
 
 ## Render Deploy
 
+Use **Static Site** in Render:
+
+- Build command: `npm ci && npm run build`
+- Publish directory: `out`
 - Node version: `20.x` (repo pins this via `package.json` engines and `.nvmrc`)
-- Build command: `npm run build` (do not use `npm install && npm run build`)
-- Start command: `npm run start`
 - Optional blueprint: [`render.yaml`](./render.yaml)
 
 ## Project Structure
@@ -48,6 +50,9 @@ components/
   layout/
     SiteHeader.tsx
     SiteFooter.tsx
+  work/
+    WorkDetailClient.tsx
+    WorkListClient.tsx
   sections/
     HeroSection.tsx
     IdentitySection.tsx
@@ -61,10 +66,10 @@ lib/
   content.ts
   data/
     projects.ts
+    projects-client.ts
   supabase/
     browser.ts
     config.ts
-    server.ts
 supabase/
   schema.sql
 types/
@@ -73,7 +78,9 @@ types/
 
 ## Architecture Notes
 
-- Data fetch for primary portfolio content runs on server components.
+- App is exported as a static site (`output: "export"`).
+- Primary pages render with static fallback content at build-time.
+- Browser runtime syncs project data from Supabase using the anon key.
 - Supabase access is isolated in `lib/supabase/*`.
 - `lib/data/*` owns query logic and fallback behavior.
 - `components/*` stay presentation-focused.

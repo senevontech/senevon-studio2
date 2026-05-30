@@ -1,11 +1,34 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { SectionShell } from "@/components/ui/SectionShell";
+import { fetchFeaturedProjectsClient } from "@/lib/data/projects-client";
 import type { PortfolioProject } from "@/types/project";
 
 type WorkSectionProps = {
-  items: PortfolioProject[];
+  initialItems: PortfolioProject[];
 };
 
-export function WorkSection({ items }: WorkSectionProps) {
+export function WorkSection({ initialItems }: WorkSectionProps) {
+  const [items, setItems] = useState<PortfolioProject[]>(initialItems);
+
+  useEffect(() => {
+    let active = true;
+
+    async function syncFromSupabase() {
+      const liveProjects = await fetchFeaturedProjectsClient();
+      if (active) {
+        setItems(liveProjects);
+      }
+    }
+
+    syncFromSupabase();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <SectionShell
       id="work"
@@ -16,7 +39,7 @@ export function WorkSection({ items }: WorkSectionProps) {
       <div className="grid gap-5 md:grid-cols-3">
         {items.map((project) => (
           <article
-            key={project.name}
+            key={project.slug}
             className="rounded-2xl border border-surface-edge bg-gradient-to-b from-surface-panel to-surface-base p-6"
           >
             <p className="text-xs uppercase tracking-[0.2em] text-accent-cyan">

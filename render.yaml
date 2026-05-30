@@ -1,9 +1,9 @@
 services:
-  - type: web
+  - type: static
     name: senevon-studio2
-    env: node
+    env: static
     buildCommand: npm ci && npm run build
-    startCommand: npm run start
+    staticPublishPath: out
     envVars:
       - key: NODE_VERSION
         value: 20.18.0

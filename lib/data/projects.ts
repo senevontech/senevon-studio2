@@ -1,29 +1,7 @@
-import { cache } from "react";
 import { projects as fallbackProjects } from "@/lib/content";
-import { getSupabaseServerClient } from "@/lib/supabase/server";
 import type { PortfolioProject } from "@/types/project";
 
-type SupabaseProjectRow = {
-  slug: string;
-  name: string;
-  category: string;
-  impact: string;
-  summary: string | null;
-  is_featured: boolean;
-  rank: number | null;
-};
-
-const toProject = (row: SupabaseProjectRow): PortfolioProject => ({
-  slug: row.slug,
-  name: row.name,
-  category: row.category,
-  impact: row.impact,
-  summary: row.summary ?? undefined,
-  isFeatured: row.is_featured,
-  rank: row.rank ?? undefined
-});
-
-const fallback = fallbackProjects.map((project) => ({
+const fallback: PortfolioProject[] = fallbackProjects.map((project) => ({
   slug: project.slug,
   name: project.name,
   category: project.category,
@@ -32,33 +10,17 @@ const fallback = fallbackProjects.map((project) => ({
   isFeatured: true
 }));
 
-export const getAllProjects = cache(async (): Promise<PortfolioProject[]> => {
-  try {
-    const supabase = getSupabaseServerClient();
-    const { data, error } = await supabase
-      .from("projects")
-      .select("slug,name,category,impact,summary,is_featured,rank")
-      .order("rank", { ascending: true, nullsFirst: false });
+export function getAllProjectsStatic(): PortfolioProject[] {
+  return fallback;
+}
 
-    if (error || !data || data.length === 0) {
-      return fallback;
-    }
-
-    return (data as SupabaseProjectRow[]).map(toProject);
-  } catch {
-    return fallback;
-  }
-});
-
-export const getFeaturedProjects = cache(async (): Promise<PortfolioProject[]> => {
-  const all = await getAllProjects();
+export function getFeaturedProjectsStatic(): PortfolioProject[] {
+  const all = getAllProjectsStatic();
   const featured = all.filter((project) => project.isFeatured !== false);
   return featured.length > 0 ? featured : all;
-});
+}
 
-export const getProjectBySlug = cache(
-  async (slug: string): Promise<PortfolioProject | null> => {
-    const all = await getAllProjects();
-    return all.find((project) => project.slug === slug) ?? null;
-  }
-);
+export function getProjectBySlugStatic(slug: string): PortfolioProject | null {
+  const all = getAllProjectsStatic();
+  return all.find((project) => project.slug === slug) ?? null;
+}

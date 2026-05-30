@@ -6,12 +6,10 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { IdentitySection } from "@/components/sections/IdentitySection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { WorkSection } from "@/components/sections/WorkSection";
-import { getFeaturedProjects } from "@/lib/data/projects";
+import { getFeaturedProjectsStatic } from "@/lib/data/projects";
 
-export const revalidate = 300;
-
-export default async function HomePage() {
-  const featuredProjects = await getFeaturedProjects();
+export default function HomePage() {
+  const featuredProjects = getFeaturedProjectsStatic();
 
   return (
     <main className="min-h-screen bg-surface-base text-text-base">
@@ -19,7 +17,7 @@ export default async function HomePage() {
       <HeroSection />
       <IdentitySection />
       <CapabilitiesSection />
-      <WorkSection items={featuredProjects} />
+      <WorkSection initialItems={featuredProjects} />
       <ProcessSection />
       <CTASection />
       <SiteFooter />
